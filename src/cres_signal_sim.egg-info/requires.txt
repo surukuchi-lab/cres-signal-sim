@@ -1,0 +1,7 @@
+numpy>=1.23
+scipy>=1.9
+pyyaml>=6.0
+h5py>=3.8
+
+[root]
+uproot>=5.0

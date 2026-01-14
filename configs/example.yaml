@@ -1,0 +1,83 @@
+simulation:
+  starting_time_s: 0.0
+  track_length_s: 0.001
+
+electron:
+  energy_eV: 18563.251
+  pitch_angle_deg: 89.0
+  r0_m: 0.16
+  phi0_rad: 0.0
+  z0_m: 0.0
+  vpar_sign: 1
+  cyclotron_phase0_rad: 0.0
+
+features:
+  include_true_orbit: true
+  include_gradB: true
+  include_resonance: false
+  write_root: false
+  amplitude_mode: sqrtP
+  normalize_amp_at_t0: false
+
+trap:
+  field_map_npz: /gpfs/gibbs/project/heeger/ek787/Hopper/cres-signal-sim/resources/field_map_rz_components.npz
+  coil_xml: null
+  generate_if_missing: false
+  placeholder_if_missing: true
+  interpolation: bilinear
+  clamp_to_grid: true
+  grid:
+    r_max_m: 0.327
+    z_min_m: -2.0
+    z_max_m: 2.0
+    n_r: 201
+    n_z: 801
+
+cavity:
+  radius_m: 0.327
+  length_m: 4.0
+  f0_hz: 560.3e6
+  Q: 500
+
+mode_map:
+  type: analytic_te011
+
+resonance:
+  root_file: /gpfs/gibbs/project/heeger/ek787/Hopper/cres-signal-sim/resources/UnitTestOutput.root
+  object_name: cavityHisto
+  normalize_to_peak: true
+
+dynamics:
+  dt_max_s: 2e-9
+  dt_min_s: 1e-12
+  safety: 0.98
+  v_turn_threshold_c: 1e-5
+
+  axial_strategy: template_tiling         # direct OR template_tiling
+  template_build: integrate               # integrate OR mirror
+
+  energy_loss_model: linear_fit           # none OR per_bounce OR linear_fit
+  energy_loss_scale: 1.0
+  energy_floor_eV: 1000.0
+  energy_loss_fit_bounces: 6
+
+  time_step_strategy: phase_uniform      # axial_adaptive OR phase_bounded OR phase_uniform
+  samples_per_cyclotron_turn: 15        # set integer to enable
+  max_internal_points: 2000000
+
+signal:
+  lo_hz: 563.e6
+  fs_if_hz: 22e6
+  if_decim: 1
+  fs_hz: null
+  if_antialias_filter: true
+  if_filter_order: 8
+  if_filter_cutoff_ratio: 0.9
+  carrier_phase0_rad: 0.0
+  normalize_power: false
+
+output:
+  out_dir: /gpfs/gibbs/project/heeger/ek787/Hopper/cres-signal-sim/outputs
+  basename: sim_001_89deg_18563_251eV_16cm
+  write_npz: true
+  write_root: true

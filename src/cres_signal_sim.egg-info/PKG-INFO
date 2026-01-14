@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: cres-signal-sim
+Version: 0.1.0
+Summary: Synthetic CRES signal + track simulator (cyclotron + axial + grad-B drift)
+Author: E. Karim
+License: MIT
+Keywords: CRES,Project8,simulation,cyclotron
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.23
+Requires-Dist: scipy>=1.9
+Requires-Dist: pyyaml>=6.0
+Requires-Dist: h5py>=3.8
+Provides-Extra: root
+Requires-Dist: uproot>=5.0; extra == "root"
+
+# CRES Signal Sim
+
+This package generates synthetic single-electron CRES tracks and complex IQ time series.
+
+Key features:
+- Axial bounce motion from adiabatic invariant μ
+- Cyclotron motion with evolving cyclotron frequency
+- Grad-B drift using ∂B/∂r from finite-difference field gradients
+- Magnetic field interpolation (bilinear/linear/nearest/cubic spline)
+- Trap field map generation from coil XML (axisymmetric loops)
+- Analytic TE_011 mode map
+- Optional cavity resonance curve from ROOT via uproot
+- Outputs:
+  - NPZ (time, iq)
+  - Optional ROOT (track arrays)
+
+## Install
+conda env create -f environment.yml
+conda activate cres-sim
+pip install -e .
+
+## Run
+cres-sim configs/example.yaml
